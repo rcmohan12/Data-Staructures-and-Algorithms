@@ -3,8 +3,8 @@ package com.rcm.dataStructure.arrays;
 public class MergeSortedArrays {
 
     public static void main(String[] args) {
-        int[] arr1 = {1, 4, 8, 13, 22, 30, 31};
-        int[] arr2 = {2, 7, 11, 12, 30};
+        int[] arr1 = {1, 22, 30, 31};
+        int[] arr2 = {2, 30};
         sort(arr1, arr2);
     }
 
@@ -45,7 +45,7 @@ public class MergeSortedArrays {
         }
         if(!a1Updated) {
             sortedArray[index3] = arr1[index1];
-        } else if(!a2Updated) {
+        } if(!a2Updated) {
             sortedArray[index3] = arr2[index2];
         }
         for(int i : sortedArray) {
@@ -58,3 +58,14 @@ public class MergeSortedArrays {
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
