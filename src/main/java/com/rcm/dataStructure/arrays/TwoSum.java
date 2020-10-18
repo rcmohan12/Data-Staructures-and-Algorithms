@@ -10,7 +10,7 @@ public class TwoSum {
 
     public static void main(String[] args) {
         long start = System.currentTimeMillis();
-        bruteForce(new int[]{1, 2, 3, 4, 5, 6, 7, 23, 4, 2, 5, 78, 2, 3, 3, 6, 9, 43, 2, 23, 43, 5, 3, 83, 2, 8, 4, 7, 23, 7, 23, 4, 2, 5, 43, 2, 23, 43, 5, 3, 83, 2, 8, 4, 7, 23, 7, 23, 43, 2, 23, 43, 5, 3, 83, 2, 8, 4, 7, 23, 7, 23, 4, 2, 5, 78, 2, 3, 3, 6, 9, 43, 2, 23, 43, 5, 3, 83, 4, 2, 5, 78, 2, 3, 3, 6, 9, 43, 4, 2, 5, 78, 2, 3, 3, 6, 9, 43, 2, 23, 43, 5, 3, 83, 4, 2, 5, 78, 2, 3, 3, 6, 9, 4378, 2, 3, 3, 6, 9, 43, 2, 23, 43, 5, 3, 83, 4, 2, 5, 78, 2, 3, 3, 6, 9, 43, 2, 23, 43, 5, 3, 83,6, 89, 34, 22, 63, 58, 3456}, 3457);
+        bruteForce(new int[]{1, 2, 3456}, 3457);
         long end = System.currentTimeMillis();
         System.out.println("Brute force time taken :"+ (end-start) + "ms");
 
