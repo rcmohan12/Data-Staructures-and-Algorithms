@@ -51,10 +51,6 @@ public class MergeSortedArrays {
         for(int i : sortedArray) {
             System.out.print(i + " ");
         }
-        
-    }
-
-    public static void increment() {
 
     }
 
