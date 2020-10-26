@@ -24,6 +24,7 @@ public class MyLinkedList {
     /**
      * Use this method to add to the end of the LL
      * The head remains constant whereas the tail changes to refer to the last added value to the LL
+     * Time complexity - O(1)
      * @param val
      */
     public void append(String val) {
@@ -32,6 +33,19 @@ public class MyLinkedList {
         this._tail.setNext(newNode);
         this._tail = newNode;
         _length++;
+    }
+
+    /**
+     * Use this method to add a value to the beginning of the LL
+     * The tail remains the same and the head changes as and when a new value is added to the beginning of the LL
+     * Time complexity - O(1)
+     * @param val
+     */
+    public void prepend(String val) {
+        LinkedNode newNode = new LinkedNode();
+        newNode.setVal(val);
+        newNode.setNext(this._head);
+        this._head = newNode;
     }
 
 
@@ -85,6 +99,7 @@ class TestMyLinkedList {
         myLL.append("eine");
         myLL.append("Schone");
         myLL.append("Frau");
+        myLL.prepend("Ja, ");
         System.out.println("My Linked List :"+myLL);
     }
 
