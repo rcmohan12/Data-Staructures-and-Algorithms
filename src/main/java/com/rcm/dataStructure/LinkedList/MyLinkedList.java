@@ -30,7 +30,7 @@ public class MyLinkedList {
         newNode.setVal(val);
         this._tail.setNext(newNode);
         this._tail = newNode;
-        _length++;
+        this._length++;
     }
 
     /**
@@ -44,6 +44,7 @@ public class MyLinkedList {
         newNode.setVal(val);
         newNode.setNext(this._head);
         this._head = newNode;
+        this._length++;
     }
 
     /**
@@ -68,6 +69,7 @@ public class MyLinkedList {
                     newNode.setVal(val);
                     previousNode.setNext(newNode);
                     newNode.setNext(currentNode);
+                    this._length++;
                     return;
                 } else {
                     previousNode = currentNode;
@@ -76,6 +78,33 @@ public class MyLinkedList {
                 x++;
             }
         }
+    }
+
+    public void remove(int index) {
+        int x = 1;
+        Node currentNode = this._head;
+        Node previousNode = currentNode;
+
+            while(x<=this._length) {
+                if(index == 1) {
+                    this._head = currentNode.getNext();
+                    this._length--;
+                    break;
+                } else if (x == index) {
+                    if(index == this._length) {
+                        previousNode.setNext(null);
+                        this._tail = previousNode;
+                    } else {
+                        previousNode.setNext(currentNode.getNext());
+                    }
+                    this._length--;
+                    break;
+                } else {
+                    previousNode = currentNode;
+                    currentNode = currentNode.getNext();
+                }
+                x++;
+            }
     }
 
     @Override
@@ -123,19 +152,16 @@ class Node {
 class TestMyLinkedList {
 
     public static void main(String[] args) {
-        MyLinkedList myLL = new MyLinkedList("Sie");
-        myLL.append("ist");
-        myLL.append("eine");
-        myLL.append("Schone");
-        myLL.append("Frau");
-        myLL.prepend("Ja, ");
+        MyLinkedList myLL = new MyLinkedList("1");
+        myLL.append("2");
+        myLL.append("3");
+        myLL.append("4");
+        myLL.append("5");
 
-        myLL.insert(2, "es it true,");
-
-        myLL.insert(-7, "es it true,");
-
-        myLL.insert(25, "es it true,");
-
+        System.out.println("My Linked List :"+myLL);
+        myLL.remove(1);
+        System.out.println("My Linked List :"+myLL);
+        myLL.remove(4);
         System.out.println("My Linked List :"+myLL);
     }
 
