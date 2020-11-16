@@ -59,7 +59,7 @@ public class MyLinkedList {
         Node previousNode = currentNode;
         if(index == 1) {
             prepend(val);
-        } else if (x == this._length) {
+        } else if (index == this._length) {
             append(val);
         } else if (index < 0 || index > this._length) {
             System.out.println("Not a valid index position");
@@ -97,7 +97,7 @@ public class MyLinkedList {
                     this._head = currentNode.getNext();
                     this._length--;
                     break;
-                } else if (x == index) {
+                } else if (index == index) {
                     if(index == this._length) {
                         previousNode.setNext(null);
                         this._tail = previousNode;
