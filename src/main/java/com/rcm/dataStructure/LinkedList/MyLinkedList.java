@@ -49,6 +49,7 @@ public class MyLinkedList {
 
     /**
      * Use this method to add a value at a specific index position in the linked list
+     * Time complexity - O(n)
      * @param index
      * @param val
      */
@@ -80,6 +81,12 @@ public class MyLinkedList {
         }
     }
 
+
+    /**
+     * Use this method to remove a value in the LL at a specified index location
+     * Time complexity - O(n)
+     * @param index
+     */
     public void remove(int index) {
         int x = 1;
         Node currentNode = this._head;
