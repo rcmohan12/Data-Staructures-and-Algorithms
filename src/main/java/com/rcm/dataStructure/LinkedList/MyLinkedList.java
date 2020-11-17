@@ -1,11 +1,15 @@
 package com.rcm.dataStructure.LinkedList;
 
+import java.util.Date;
+
 public class MyLinkedList {
 
     private Node _head;
     private Node _tail;
     private long _length;
 
+    MyLinkedList() {
+    }
 
     /**
      * Constructer initializing the head and the tail values.
@@ -28,8 +32,15 @@ public class MyLinkedList {
     public void append(String val) {
         Node newNode = new Node();
         newNode.setVal(val);
-        this._tail.setNext(newNode);
-        this._tail = newNode;
+
+        if(this._head == null && this._tail == null ) {
+            this._head = newNode;
+            this._tail = this._head;
+        } else {
+            this._tail.setNext(newNode);
+            this._tail = newNode;
+        }
+
         this._length++;
     }
 
@@ -114,6 +125,49 @@ public class MyLinkedList {
             }
     }
 
+    /**
+     * Reversing the LL by creating a new one
+     * Time complexity - O(n)
+     * Space complexity - O(n)
+     */
+    public void reverse() {
+        Node currentHead = this._head;
+        MyLinkedList newLL = new MyLinkedList(currentHead.getVal());
+        while (currentHead.next != null) {
+            currentHead = currentHead.next;
+            newLL.prepend(currentHead.getVal());
+        }
+
+        this._head = newLL._head;
+        this._tail = newLL._tail;
+    }
+
+    /**
+     * No new LL is created
+     * Time complexity - O(n)
+     * Space complexity - O(1)
+     * Think of the reversal as progressively pointing the 'next' object to the previous one
+     * start : START --> 1 --> 2 --> 3 --> 4 --> END
+     * step 1 : START <-- 1 --> 2 --> 3 --> 4 --> END
+     * step 2 : START <-- 1 <-- 2 --> 3 --> 4 --> END
+     * step 3 : START <-- 1 <-- 2 <-- 3 --> 4 --> END
+     * and so on ......
+     * Check video - https://www.youtube.com/watch?v=O0By4Zq0OFc
+     */
+    public void reverseOptimised() {
+        Node previousNode = null;
+        Node currentNode = this._head;
+        this._tail = currentNode; // the current head becomes the new tail
+        Node nextNode = null;
+        while (currentNode != null) {
+            nextNode = currentNode.next;
+            currentNode.next = previousNode;
+            previousNode = currentNode;
+            currentNode = nextNode;
+        }
+        this._head = previousNode; // the current tail becomes the new head
+    }
+
     @Override
     public String toString() {
         return "MyLinkedList{" +
@@ -160,16 +214,18 @@ class TestMyLinkedList {
 
     public static void main(String[] args) {
         MyLinkedList myLL = new MyLinkedList("1");
-        myLL.append("2");
-        myLL.append("3");
-        myLL.append("4");
-        myLL.append("5");
+        for(int x = 2; x < 100000; x++) {
+            myLL.append(String.valueOf(x));
+        }
+        Long start = System.currentTimeMillis();
+        myLL.reverse();
+        Long end = System.currentTimeMillis();
+        System.out.println("Time taken: "+(end - start));
 
-        System.out.println("My Linked List :"+myLL);
-        myLL.remove(1);
-        System.out.println("My Linked List :"+myLL);
-        myLL.remove(4);
-        System.out.println("My Linked List :"+myLL);
+        Long start1 = System.currentTimeMillis();
+        myLL.reverseOptimised();
+        Long end1 = System.currentTimeMillis();
+        System.out.println("Time taken: "+(end1 - start1));
     }
 
 }
