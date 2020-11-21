@@ -2,8 +2,8 @@ package com.rcm.dataStructure.Stack;
 
 public class MyStack {
 
-    private StackNode _top;
-    private StackNode _bottom;
+    private StackNode _top; // Most recent element added to the stack
+    private StackNode _bottom; // The very first element added to te stack
     private long _length;
 
 
@@ -13,7 +13,10 @@ public class MyStack {
         this._length = 0;
     }
 
-    //push
+    /**
+     * This method adds the new value to the top of the stack
+     * @param val : string value to be added to the stack
+     */
     public void push(String val) {
         StackNode node = new StackNode(val);
         if(this._bottom == null) {
@@ -26,20 +29,38 @@ public class MyStack {
         }
         this._length++;
     }
-    //pop
 
+    /**
+     * This method removes and returns the topmost value on the stack
+     * @return
+     */
     public String pop() {
         String popped = "";
         if(this._top != null) {
             popped =  this._top.value;
             this._top  = this._top.nextNode;
             this._length--;
+            if(_length == 0) {
+                this._bottom = this._top;
+            }
             return popped;
         } else {
             return "Empty Stack";
         }
     }
-    //peek
+
+    /**
+     * This method returns the topmost value on the stack WITHOUT removing it
+     * @return
+     */
+    public String peek() {
+        if(this._top != null) {
+            return this._top.value;
+        } else {
+            return "Stack is empty";
+        }
+
+    }
     //isEmpty
 
     @Override
@@ -96,8 +117,14 @@ class TestMyStack {
         stack.push("Udemy");
         stack.push("Twitter");
         System.out.println(stack);
+        System.out.println("Peek ------>"+stack.peek());
         System.out.println(stack.pop());
+        System.out.println("Peek ------>"+stack.peek());
         System.out.println(stack.pop());
+        System.out.println("Peek ------>"+stack.peek());
         System.out.println(stack.pop());
+        System.out.println(stack.peek());
+//        stack.push("Twitter");
+        System.out.println(stack);
     }
 }
