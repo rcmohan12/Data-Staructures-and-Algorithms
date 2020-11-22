@@ -7,7 +7,15 @@ public class AlsoMyStack {
     private String _stackValues[];
     private int _length;
 
-    AlsoMyStack() {
+    public int get_length() {
+        return _stackValues.length;
+    }
+
+    public String[] get_stackValues() {
+        return _stackValues;
+    }
+
+    public AlsoMyStack() {
         this._stackValues = new String[5];
         this._length = 0;
     }

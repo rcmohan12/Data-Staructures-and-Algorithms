@@ -61,7 +61,18 @@ public class MyStack {
         }
 
     }
-    //isEmpty
+
+    /**
+     * Check if the stack is empty
+     * @return
+     */
+    public Boolean isEmpty() {
+        if(this._top == null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     @Override
     public String toString() {
@@ -113,7 +124,9 @@ class StackNode {
 class TestMyStack {
     public static void main(String[] args) {
         MyStack stack = new MyStack();
+        System.out.println("Empty? "+stack.isEmpty());
         stack.push("Google");
+        System.out.println("Empty? "+stack.isEmpty());
         stack.push("Udemy");
         stack.push("Twitter");
         System.out.println(stack);
