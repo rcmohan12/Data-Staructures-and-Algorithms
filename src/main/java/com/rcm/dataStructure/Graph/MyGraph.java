@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Custom class that implements a Graph using an adjacency list
+ * Custom class that implements a bidirectional & unweighted Graph using an adjacency list to define the node connectivity
  * Making use of HashTable available in the Java API
  */
 public class MyGraph {
@@ -18,6 +18,12 @@ public class MyGraph {
         this._adjacentList = new Hashtable<>();
     }
 
+    /**
+     * Method to add unique nodes to the graph
+     * Time Complexity - O(1)
+     * @param val
+     * @return
+     */
     public boolean addVertex(int val) {
         GraphNode node = new GraphNode(val);
         if(!_adjacentList.containsKey(val)) {
@@ -28,16 +34,26 @@ public class MyGraph {
         return false;
     }
 
+    /**
+     * Builds the adjacency list used to define the node connections
+     * @param v1
+     * @param v2
+     * @return
+     */
     public boolean addEdge(int v1, int v2) {
-        if(_adjacentList.containsKey(v1) && _adjacentList.containsKey(v2)) {
+        if(_adjacentList.containsKey(v1) && _adjacentList.containsKey(v2)) { // Ensure that the node is first present in the graph
             List<GraphNode> list = _adjacentList.get(v1);
+            List<GraphNode> list2 = _adjacentList.get(v2);
             GraphNode edge = new GraphNode(v2);
-            if(list.contains(edge)) {
-                return false;
-            } else {
+            GraphNode edge2 = new GraphNode(v1);
+            if(!list.contains(edge)) {
                 list.add(edge);
+            }
+            if(!list2.contains(edge2)) {
+                list2.add(edge2);
                 return true;
             }
+            return false;
         } else {
             return false;
         }
