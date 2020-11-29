@@ -46,10 +46,10 @@ public class MyGraph {
             List<GraphNode> list2 = _adjacentList.get(v2);
             GraphNode edge = new GraphNode(v2);
             GraphNode edge2 = new GraphNode(v1);
-            if(!list.contains(edge)) {
+            if(!list.contains(edge)) { // adding bidirectional relationship
                 list.add(edge);
             }
-            if(!list2.contains(edge2)) {
+            if(!list2.contains(edge2)) { // adding bidirectional relationship
                 list2.add(edge2);
                 return true;
             }
