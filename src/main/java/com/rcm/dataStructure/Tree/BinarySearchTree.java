@@ -117,19 +117,11 @@ public class BinarySearchTree {
                     }
                     return false;
                 } else if (node.getRight() != null) {
-                    if(node.getRight().getLeft() != null) { // Case 2
-                        TreeNode replaceWith = node.getRight().getLeft();
-                        node.getRight().setLeft(null);
-                        replaceWith.setLeft(node.getLeft());
-                        replaceWith.setRight(node.getRight());
-                        if(node.getValue() == _rootNode.getValue()) {
-                            _rootNode = replaceWith;
-                        }
-                        node.setLeft(null);
-                        node.setRight(null);
-                        node = null;
-                        return true;
-                    } else if (node.getRight().getLeft() == null) { // Case 3
+                    // Here we need to loop through until we find the leftmost node
+                    TreeNode leftNode = node.getRight().getLeft();
+                    TreeNode prev = leftNode;
+                    if ((node.getLeft() == null && node.getRight() != null) ||
+                            (node.getRight().getLeft() == null)) { // Case 3
                         if(val == _rootNode.getValue()) { // where the node to be removed is the root node
                             node.getRight().setLeft(node.getLeft());
                             _rootNode = node.getRight();
@@ -143,6 +135,33 @@ public class BinarySearchTree {
                             return true;
                         }
                         return false;
+                    } else if(leftNode != null) { // Case 2
+                        while(leftNode.getLeft() != null) {
+                            prev = leftNode;
+                            leftNode = leftNode.getLeft();
+                        }
+                        if(leftNode.getValue() != prev.getValue()) {
+                            prev.setLeft(null);
+                        } else {
+                            node.getRight().setLeft(null);
+                        }
+                        leftNode.setLeft(node.getLeft());
+                        leftNode.setRight(node.getRight());
+                        if(node.getValue() == _rootNode.getValue()) {
+                            _rootNode = leftNode;
+                        }
+                        node.setLeft(null);
+                        node.setRight(null);
+                        node = null;
+                        return true;
+                    }
+                } else if(node.getLeft() != null && node.getRight() == null) {
+                    System.out.println("here?");
+                    if(node.getValue() == _rootNode.getValue()) {
+                        TreeNode root = _rootNode;
+                        _rootNode = node.getLeft();
+                        root.setLeft(null);
+                        return true;
                     }
                 }
             } else if (val < node.getValue()) {
@@ -256,6 +275,28 @@ class TestMyBST {
 //        tree.insert(26);
 //        System.out.println(tree);
 //        System.out.println("removed ?"+tree.remove(25));
+//        Case 2 Part 2
+//        tree.insert(25);
+//        tree.insert(5);
+//        tree.insert(40);
+//        tree.insert(39);
+//        tree.insert(38);
+//        tree.insert(37);
+//        tree.insert(36);
+//        Case 2 part 3
+//        tree.insert(25);
+//        tree.insert(5);
+//        tree.insert(35);
+//        tree.insert(50);
+//        tree.insert(49);
+//        tree.insert(48);
+//        tree.insert(47);
+//        Case 2 part 4
+        tree.insert(25);
+        tree.insert(5);
+        System.out.println(tree);
+        System.out.println("removed ?"+tree.remove(25));
+        System.out.println(tree);
 //        Case 3
 //        tree.insert(25);
 //        tree.insert(5);
@@ -265,15 +306,15 @@ class TestMyBST {
 //        System.out.println("removed ?"+tree.remove(25));
 //        System.out.println(tree);
 //        Case 3 : part 2
-        tree.insert(25);
-        tree.insert(5);
-        tree.insert(30);
-        tree.insert(26);
-        tree.insert(24);
-        tree.insert(28);
-        tree.insert(31);
-        System.out.println(tree);
-        System.out.println("removed ?"+tree.remove(26));
-        System.out.println(tree);
+//        tree.insert(25);
+//        tree.insert(5);
+//        tree.insert(30);
+//        tree.insert(26);
+//        tree.insert(24);
+//        tree.insert(28);
+//        tree.insert(31);
+//        System.out.println(tree);
+//        System.out.println("removed ?"+tree.remove(26));
+//        System.out.println(tree);
     }
 }
