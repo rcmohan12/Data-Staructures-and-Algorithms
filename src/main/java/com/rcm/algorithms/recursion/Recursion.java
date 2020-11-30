@@ -1,4 +1,4 @@
-package com.rcm.algorithms;
+package com.rcm.algorithms.recursion;
 
 public class Recursion {
 
