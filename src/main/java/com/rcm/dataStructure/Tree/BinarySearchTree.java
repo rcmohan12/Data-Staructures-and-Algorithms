@@ -1,6 +1,9 @@
 package com.rcm.dataStructure.Tree;
 
-import java.util.Objects;
+import com.rcm.dataStructure.LinkedList.MyLinkedList;
+import com.rcm.dataStructure.queue.MyQueue;
+
+import java.util.*;
 
 /**
  * The Binary search tree is a rooted binary tree whose internal nodes each store a key greater
@@ -183,6 +186,25 @@ public class BinarySearchTree {
         return false;
     }
 
+    public void breadthFirstSearch() {
+        TreeNode currentNode = this._rootNode;
+        List<TreeNode> queue = new LinkedList<>();
+        List<Integer> nodes = new ArrayList<>();
+        queue.add(currentNode);
+        while(!queue.isEmpty()) {
+            currentNode = queue.remove(0);
+            System.out.println("---->"+currentNode.getValue());
+            nodes.add(currentNode.getValue());
+            if(currentNode.getLeft() != null) {
+                queue.add(currentNode.getLeft());
+            }
+
+            if(currentNode.getRight() != null) {
+                queue.add(currentNode.getRight());
+            }
+        }
+    }
+
     @Override
     public String toString() {
         return "BinarySearchTree{" +
@@ -248,6 +270,9 @@ class TreeNode {
 
 class TestMyBST {
     public static void main(String[] args) {
+        if(true) {
+            System.out.println("always true");
+        }
 //        BinarySearchTree tree = new BinarySearchTree();
 //        tree.insert(25);
 //        tree.insert(5);
@@ -262,6 +287,7 @@ class TestMyBST {
 //           System.out.println("removed");
 //       }
         BinarySearchTree tree = new BinarySearchTree();
+
 //        Case 1:
 //        tree.insert(25);
 //        tree.insert(5);
@@ -292,11 +318,11 @@ class TestMyBST {
 //        tree.insert(48);
 //        tree.insert(47);
 //        Case 2 part 4
-        tree.insert(25);
-        tree.insert(5);
-        System.out.println(tree);
-        System.out.println("removed ?"+tree.remove(25));
-        System.out.println(tree);
+//        tree.insert(25);
+//        tree.insert(5);
+//        System.out.println(tree);
+//        System.out.println("removed ?"+tree.remove(25));
+//        System.out.println(tree);
 //        Case 3
 //        tree.insert(25);
 //        tree.insert(5);
@@ -306,15 +332,20 @@ class TestMyBST {
 //        System.out.println("removed ?"+tree.remove(25));
 //        System.out.println(tree);
 //        Case 3 : part 2
-//        tree.insert(25);
-//        tree.insert(5);
-//        tree.insert(30);
-//        tree.insert(26);
-//        tree.insert(24);
-//        tree.insert(28);
-//        tree.insert(31);
-//        System.out.println(tree);
+        tree.insert(25);
+        tree.insert(5);
+        tree.insert(30);
+        tree.insert(26);
+        tree.insert(24);
+        tree.insert(28);
+        tree.insert(31);
+        System.out.println(tree);
+        tree.breadthFirstSearch();
 //        System.out.println("removed ?"+tree.remove(26));
 //        System.out.println(tree);
     }
 }
+//              25
+//    5                   30
+//        24          26      31
+//                        28
