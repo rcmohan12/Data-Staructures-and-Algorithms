@@ -20,6 +20,8 @@ import java.util.*;
  *                  log n = h
  */
 public class BinarySearchTree {
+
+
     private TreeNode _rootNode;
 
     /**
@@ -205,6 +207,29 @@ public class BinarySearchTree {
         }
     }
 
+    public List<Integer> breadthFirstSearchRecursive(List<TreeNode> queue, List<Integer> vals) {
+        if(queue.size() != 0) {
+            TreeNode currentNode = queue.remove(0);
+            System.out.println("!---->"+currentNode.getValue());
+            vals.add(currentNode.getValue());
+            if(currentNode.getLeft() != null) {
+                queue.add(currentNode.getLeft());
+            }
+
+            if(currentNode.getRight() != null) {
+                queue.add(currentNode.getRight());
+            }
+        } else {
+            return vals;
+        }
+
+        return breadthFirstSearchRecursive(queue, vals);
+    }
+
+    public TreeNode get_rootNode() {
+        return _rootNode;
+    }
+
     @Override
     public String toString() {
         return "BinarySearchTree{" +
@@ -270,9 +295,7 @@ class TreeNode {
 
 class TestMyBST {
     public static void main(String[] args) {
-        if(true) {
-            System.out.println("always true");
-        }
+
 //        BinarySearchTree tree = new BinarySearchTree();
 //        tree.insert(25);
 //        tree.insert(5);
@@ -340,7 +363,9 @@ class TestMyBST {
         tree.insert(28);
         tree.insert(31);
         System.out.println(tree);
-        tree.breadthFirstSearch();
+        List<TreeNode> queue = new ArrayList<>();
+        queue.add(tree.get_rootNode());
+        tree.breadthFirstSearchRecursive(queue, new ArrayList<>());
 //        System.out.println("removed ?"+tree.remove(26));
 //        System.out.println(tree);
     }
