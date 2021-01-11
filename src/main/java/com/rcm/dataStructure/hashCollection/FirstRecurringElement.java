@@ -11,6 +11,7 @@ public class FirstRecurringElement extends HashMap{
 
     }
 
+    // Time complexity O(n)
     public static String returnFirstRecurringElementBruteForce(String[] elements) {
         for(int i = 0; i < elements.length; i++) {
             for(int j = i+1; j<elements.length; j++) {
