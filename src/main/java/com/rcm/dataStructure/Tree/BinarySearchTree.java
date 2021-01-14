@@ -276,12 +276,12 @@ public class BinarySearchTree {
      * //       9
      * //   4       20
      * // 1  6    15  170
-     * DFS InOrder -> [9, 4, 1, 6, 20, 15, 170]
+     * DFS PreOrder -> [9, 4, 1, 6, 20, 15, 170]
      *
      * This method uses recursion to order the values in the DFS pre order approach
      *
      * @param node : node under test
-     * @param vals : values of each of the nodes ordered as DFSInOrder
+     * @param vals : values of each of the nodes ordered as DFSpreOrder
      * @return
      */
     public List<Integer> DFSPreOrder(TreeNode node, List<Integer> vals) {
@@ -294,6 +294,31 @@ public class BinarySearchTree {
             DFSPreOrder(node.getRight(), vals);
         }
 
+        return vals;
+    }
+
+    /**
+     * //       9
+     * //   4       20
+     * // 1  6    15  170
+     * DFS PostOrder -> [1, 6, 4, 15, 170, 20, 9]
+     *
+     * This method uses recursion to order the values in the DFS post order approach
+     *
+     * @param node : node under test
+     * @param vals : values of each of the nodes ordered as DFSPostOrder
+     * @return
+     */
+    public List<Integer> DFSPostOrder(TreeNode node, List<Integer> vals) {
+
+        if(node.getLeft() != null) {
+            DFSPostOrder(node.getLeft(), vals);
+        }
+
+        if(node.getRight() != null) {
+            DFSPostOrder(node.getRight(), vals);
+        }
+        vals.add(node.getValue());
         return vals;
     }
 
@@ -450,7 +475,8 @@ class TestMyBST {
         tree.insert(170);
         List<Integer> vals = new ArrayList<Integer>();
 //        tree.DFSInOrder(tree.get_rootNode(), vals);
-        tree.DFSPreOrder(tree.get_rootNode(), vals);
+//        tree.DFSPreOrder(tree.get_rootNode(), vals);
+        tree.DFSPostOrder(tree.get_rootNode(), vals);
         System.out.println(vals);
 
 
