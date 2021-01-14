@@ -41,6 +41,9 @@ public class BinarySearchTree {
                         node = node.getLeft();
                     } else {
                         TreeNode newNode = new TreeNode();
+//                        if(val == 4){  // To test validity of the BST
+//                            newNode.setValue(25);
+//                        }
                         newNode.setValue(val);
                         node.setLeft(newNode);
                         System.out.println("inserted "+val);
@@ -322,6 +325,43 @@ public class BinarySearchTree {
         return vals;
     }
 
+    /**
+     * This method is used to determine if a given BST is valid using the BFS approach
+     * @param bts : the BST to be validated
+     * @return : false if invalid, true otherwise
+     */
+    public boolean ValidateBST(BinarySearchTree bts) {
+        TreeNode currentNode = bts._rootNode;
+        List<TreeNode> queue = new LinkedList<>();
+        List<Integer> nodes = new ArrayList<>();
+        queue.add(currentNode);
+        int index = 0;
+        while(!queue.isEmpty()) {
+            currentNode = queue.remove(0);
+            System.out.println("---->"+currentNode.getValue());
+
+            nodes.add(currentNode.getValue());
+            if(currentNode.getLeft() != null) {
+                if(currentNode.getLeft().getValue() < currentNode.getValue()) {
+                    queue.add(currentNode.getLeft());
+                } else {
+                    return false;
+                }
+
+            }
+
+            if(currentNode.getRight() != null) {
+                if(currentNode.getRight().getValue() > currentNode.getValue()) {
+                    queue.add(currentNode.getRight());
+                } else {
+                    return false;
+                }
+            }
+            index++;
+        }
+        return true;
+    }
+
 
     public TreeNode get_rootNode() {
         return _rootNode;
@@ -473,13 +513,13 @@ class TestMyBST {
         tree.insert(6);
         tree.insert(15);
         tree.insert(170);
-        List<Integer> vals = new ArrayList<Integer>();
+        System.out.println(tree);
+//        List<Integer> vals = new ArrayList<Integer>();
 //        tree.DFSInOrder(tree.get_rootNode(), vals);
 //        tree.DFSPreOrder(tree.get_rootNode(), vals);
-        tree.DFSPostOrder(tree.get_rootNode(), vals);
-        System.out.println(vals);
-
-
+//        tree.DFSPostOrder(tree.get_rootNode(), vals);
+        System.out.println("Valid Tree? "+tree.ValidateBST(tree));
+        
     }
 }
 //              25
