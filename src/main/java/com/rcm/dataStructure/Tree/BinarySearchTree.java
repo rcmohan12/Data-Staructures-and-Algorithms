@@ -188,6 +188,13 @@ public class BinarySearchTree {
         return false;
     }
 
+    /**
+     * //       9
+     * //   4       20
+     * // 1  6    15  170
+     * BFS -> [9, 4, 20, 1, 6, 15, 170]
+     *
+     */
     public void breadthFirstSearch() {
         TreeNode currentNode = this._rootNode;
         List<TreeNode> queue = new LinkedList<>();
@@ -207,6 +214,18 @@ public class BinarySearchTree {
         }
     }
 
+    /**
+     * //       9
+     * //   4       20
+     * // 1  6    15  170
+     * BFS -> [9, 4, 20, 1, 6, 15, 170]
+     *
+     * This method uses recursion to order the values by breadth first search approach
+     *
+     * @param queue : queue of nodes that dtermine the traversal order
+     * @param vals : values of these nodes ordered by breadth
+     * @return list of ordered values
+     */
     public List<Integer> breadthFirstSearchRecursive(List<TreeNode> queue, List<Integer> vals) {
         if(queue.size() != 0) {
             TreeNode currentNode = queue.remove(0);
@@ -224,6 +243,32 @@ public class BinarySearchTree {
         }
 
         return breadthFirstSearchRecursive(queue, vals);
+    }
+
+    /**
+     * //       9
+     * //   4       20
+     * // 1  6    15  170
+     * DFS InOrder -> [1, 4, 6, 9, 15, 20, 170]
+     *
+     * This method uses recursion to order the values in the DFS in order approach
+     *
+     * @param node : node under test
+     * @param vals : values of each of the nodes ordered as DFSInOrder
+     * @return
+     */
+    public List<Integer> DFSInOrder(TreeNode node, List<Integer> vals) {
+
+        if(node.getLeft() != null) {
+            DFSInOrder(node.getLeft(), vals);
+        }
+        System.out.println("DFS Inorder -->"+node.getValue());
+        vals.add(node.getValue());
+        if(node.getRight() != null) {
+            DFSInOrder(node.getRight(), vals);
+        }
+        
+        return vals;
     }
 
     public TreeNode get_rootNode() {
@@ -355,19 +400,32 @@ class TestMyBST {
 //        System.out.println("removed ?"+tree.remove(25));
 //        System.out.println(tree);
 //        Case 3 : part 2
-        tree.insert(25);
-        tree.insert(5);
-        tree.insert(30);
-        tree.insert(26);
-        tree.insert(24);
-        tree.insert(28);
-        tree.insert(31);
-        System.out.println(tree);
-        List<TreeNode> queue = new ArrayList<>();
-        queue.add(tree.get_rootNode());
-        tree.breadthFirstSearchRecursive(queue, new ArrayList<>());
+//        tree.insert(25);
+//        tree.insert(5);
+//        tree.insert(30);
+//        tree.insert(26);
+//        tree.insert(24);
+//        tree.insert(28);
+//        tree.insert(31);
+//        System.out.println(tree);
+//        List<TreeNode> queue = new ArrayList<>();
+//        queue.add(tree.get_rootNode());
+//        tree.breadthFirstSearchRecursive(queue, new ArrayList<>());
 //        System.out.println("removed ?"+tree.remove(26));
 //        System.out.println(tree);
+
+        tree.insert(9);
+        tree.insert(4);
+        tree.insert(20);
+        tree.insert(1);
+        tree.insert(6);
+        tree.insert(15);
+        tree.insert(170);
+        List<Integer> vals = new ArrayList<Integer>();
+        tree.DFSInOrder(tree.get_rootNode(), vals);
+        System.out.println(vals);
+
+
     }
 }
 //              25
