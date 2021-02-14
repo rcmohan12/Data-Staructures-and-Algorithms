@@ -519,7 +519,7 @@ class TestMyBST {
 //        tree.DFSPreOrder(tree.get_rootNode(), vals);
 //        tree.DFSPostOrder(tree.get_rootNode(), vals);
         System.out.println("Valid Tree? "+tree.ValidateBST(tree));
-        
+
     }
 }
 //              25
